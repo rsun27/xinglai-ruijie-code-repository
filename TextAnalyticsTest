@@ -1,0 +1,15 @@
+def text_analytics(text):
+    microsoftkey = "abcee9aa468144f19d3e776e1ace6a96"
+    endpoint2 = "https://ist256-text-analytics-rsun23.cognitiveservices.azure.com/"
+    url = f'{endpoint2}text/analytics/v3.0-preview.1/entities/recognition/general'
+    header = { 'Ocp-Apim-Subscription-Key' : microsoftkey}
+    documents = {"documents": [
+                {"id": "1", "text": text }
+            ]
+        }
+    response_review = requests.post(url,headers=header, json=documents)
+    sentiment = response_review.json()
+    return sentiment
+    
+reviews = "It is good"
+text_analytics(reviews)  
