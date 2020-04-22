@@ -1,1 +1,29 @@
+import requests
 
+def find_restaurant(place, cuisine):
+    endpoint = "https://api.yelp.com/v3"
+    yelpkey = "0y4QvsHeiDP-jhn5ArW3jB_akpUbYM1M_slolPhBsYES72pGfrZOTsb6cv1TXTZkxVnyVfuFzINn4_JOWDh7uGMn07SWrtzuOARk-6uO5ttZQBZ7k6xa_f0GBuGfXnYx"
+    url = f"{endpoint}/businesses/search"
+    header = {'Authorization' : f'Bearer {yelpkey}'}
+    parameter = {'location' : place, 'terms' : cuisine, 'sort_by' : 'rating'}
+    response = requests. get(url, params = parameter, headers = header)
+    restaurant_info = response.json()
+    return restaurant_info['businesses']
+
+loc = input("Enter a city you want to visit: ")
+food = input("Enter a cuisine: ")
+find_restaurant(loc, food)
+
+def yelp_reviews(id):
+    endpoint = "https://api.yelp.com/v3"
+    yelpkey = "0y4QvsHeiDP-jhn5ArW3jB_akpUbYM1M_slolPhBsYES72pGfrZOTsb6cv1TXTZkxVnyVfuFzINn4_JOWDh7uGMn07SWrtzuOARk-6uO5ttZQBZ7k6xa_f0GBuGfXnYx"
+    url_reviews = f"{endpoint}/businesses/{id}/reviews"
+    header = {'Authorization' : f'Bearer {yelpkey}'}
+    response1 = requests.get(url_reviews, headers = header)
+    reviews = response1.json()
+    return reviews
+
+loc = input("Enter a city you want to visit: ")
+food = input("Enter a cuisine: ")
+rest_id = find_restaurant(loc, food)[0]["id"]
+yelp_reviews(rest_id)  
