@@ -1,0 +1,6 @@
+key = "9c3a797ee2dbfbb30d13d2837ce28fac"
+url = "https://api.openweathermap.org/data/2.5/forecast"
+options = {'q' : "New York", 'appid' : key}
+response = requests.get(url,params = options)
+weather = response.json()
+weather
