@@ -1,0 +1,9 @@
+import requests
+
+inp = "Museum of Contemporary Art Australia"
+key = "AIzaSyC3bJWUG7HAxVzlWcIsPPuzUSloUWBf_7I"
+url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+options = {'key' : key, "input" : inp, "inputtype" : "textquery" , "fields" : "name,geometry,rating,formatted_address"}
+response = requests.get(url, params = options)
+gmap = response.json()
+gmap
